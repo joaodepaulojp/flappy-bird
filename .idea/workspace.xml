@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="97cb2519-b6a6-453b-90a4-c04469cc95b6" name="Changes" comment="feat: add function to draw game screen">
+    <list default="true" id="97cb2519-b6a6-453b-90a4-c04469cc95b6" name="Changes" comment="feat: finish Flappy Bird game with bug fixes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FlappyBird.py" beforeDir="false" afterPath="$PROJECT_DIR$/FlappyBird.py" afterDir="false" />
     </list>
@@ -145,7 +145,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1757121332691</updated>
-      <workItem from="1757121343530" duration="8482000" />
+      <workItem from="1757121343530" duration="9290000" />
     </task>
     <task id="LOCAL-00001" summary="feat: add initial commit FlappyBird game implementation in python">
       <option name="closed" value="true" />
@@ -187,7 +187,15 @@
       <option name="project" value="LOCAL" />
       <updated>1757131507205</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="feat: finish Flappy Bird game with bug fixes">
+      <option name="closed" value="true" />
+      <created>1757133989773</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1757133989773</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -210,9 +218,10 @@
     <MESSAGE value="feat: finalize Cano class implementation" />
     <MESSAGE value="feat: finalize Chao class implementation" />
     <MESSAGE value="feat: add function to draw game screen" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: add function to draw game screen" />
+    <MESSAGE value="feat: finish Flappy Bird game with bug fixes" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: finish Flappy Bird game with bug fixes" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/FlappyBird$FlappyBird.coverage" NAME="FlappyBird Coverage Results" MODIFIED="1757133799254" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/FlappyBird$FlappyBird.coverage" NAME="FlappyBird Coverage Results" MODIFIED="1757134562537" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

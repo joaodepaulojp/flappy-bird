@@ -1,9 +1,11 @@
-
-
 import pygame
 import os
 import random
+import time
 
+pygame.init()
+
+# ---------------------- CONFIGURAÇÃO ----------------------
 TELA_LARGURA = 500
 TELA_ALTURA = 800
 
@@ -19,14 +21,16 @@ IMAGENS_PASSARO = [
 pygame.font.init()
 FONTE_PONTOS = pygame.font.SysFont('arial', 50)
 
+
+# ---------------------- CLASSES ----------------------
 class Passaro:
     IMGS = IMAGENS_PASSARO
     ROTACAO_MAXIMA = 25
     VELOCIDADE_ROTACAO = 20
     TEMPO_ANIMACAO = 5
-    GRAVIDADE = 0.5        # gravidade suave
-    VELOCIDADE_PULO = -8    # força do pulo
-    VELOCIDADE_MAX = 12     # velocidade terminal
+    GRAVIDADE = 0.5
+    VELOCIDADE_PULO = -8
+    VELOCIDADE_MAX = 12
 
     def __init__(self, x, y):
         self.x = x
@@ -58,19 +62,19 @@ class Passaro:
 
         if self.contagem_imagem < self.TEMPO_ANIMACAO:
             self.imagem = self.IMGS[0]
-        elif self.contagem_imagem < self.TEMPO_ANIMACAO*2:
+        elif self.contagem_imagem < self.TEMPO_ANIMACAO * 2:
             self.imagem = self.IMGS[1]
-        elif self.contagem_imagem < self.TEMPO_ANIMACAO*3:
+        elif self.contagem_imagem < self.TEMPO_ANIMACAO * 3:
             self.imagem = self.IMGS[2]
-        elif self.contagem_imagem < self.TEMPO_ANIMACAO*4:
+        elif self.contagem_imagem < self.TEMPO_ANIMACAO * 4:
             self.imagem = self.IMGS[1]
-        elif self.contagem_imagem < self.TEMPO_ANIMACAO*4+1:
+        elif self.contagem_imagem < self.TEMPO_ANIMACAO * 4 + 1:
             self.imagem = self.IMGS[0]
             self.contagem_imagem = 0
 
         if self.angulo <= -80:
             self.imagem = self.IMGS[1]
-            self.contagem_imagem = self.TEMPO_ANIMACAO*2
+            self.contagem_imagem = self.TEMPO_ANIMACAO * 2
 
         imagem_rotacionada = pygame.transform.rotate(self.imagem, self.angulo)
         pos_centro_imagem = self.imagem.get_rect(topleft=(self.x, self.y)).center
@@ -80,9 +84,9 @@ class Passaro:
     def get_mask(self):
         return pygame.mask.from_surface(self.imagem)
 
+
 class Cano:
     DISTANCIA = 200
-    VELOCIDADE = 5
 
     def __init__(self, x):
         self.x = x
@@ -93,6 +97,7 @@ class Cano:
         self.CANO_BASE = IMAGEM_CANO
         self.passou = False
         self.definir_altura()
+        self.VELOCIDADE = 5
 
     def definir_altura(self):
         self.altura = random.randrange(50, 450)
@@ -117,10 +122,8 @@ class Cano:
         topo_ponto = passaro_mask.overlap(topo_mask, distancia_topo)
         base_ponto = passaro_mask.overlap(base_mask, distancia_base)
 
-        if base_ponto or topo_ponto:
-            return True
-        else:
-            return False
+        return topo_ponto or base_ponto
+
 
 class Chao:
     VELOCIDADE = 5
@@ -146,11 +149,11 @@ class Chao:
         tela.blit(self.IMAGEM, (self.x2, self.y))
 
 
+# ---------------------- FUNÇÕES ----------------------
 def desenhar_tela(tela, passaros, canos, chao, pontos):
     tela.blit(IMAGEM_BACKGROUND, (0, 0))
     for passaro in passaros:
         passaro.desenhar(tela)
-
     for cano in canos:
         cano.desenhar(tela)
 
@@ -159,6 +162,32 @@ def desenhar_tela(tela, passaros, canos, chao, pontos):
     chao.desenhar(tela)
     pygame.display.update()
 
+
+def mostrar_game_over(tela, pontos):
+
+    fonte_game_over = pygame.font.SysFont("arial", 70, bold=True)
+    fonte_botao = pygame.font.SysFont("arial", 40, bold=True)
+
+    # Mensagem GAME OVER
+    texto = fonte_game_over.render("GAME OVER", True, (255, 0, 0))
+    ret_texto = texto.get_rect(center=(TELA_LARGURA // 2, TELA_ALTURA // 2 - 50))
+    tela.blit(texto, ret_texto)
+
+    # Botão Reiniciar
+    botao_largura, botao_altura = 200, 50
+    botao_x = TELA_LARGURA // 2 - botao_largura // 2
+    botao_y = TELA_ALTURA // 2 + 20
+    pygame.draw.rect(tela, (0, 255, 0), (botao_x, botao_y, botao_largura, botao_altura))
+
+    texto_botao = fonte_botao.render("RESTART", True, (0, 0, 0))
+    ret_botao = texto_botao.get_rect(center=(TELA_LARGURA // 2, TELA_ALTURA // 2 + 45))
+    tela.blit(texto_botao, ret_botao)
+
+    pygame.display.update()
+    return pygame.Rect(botao_x, botao_y, botao_largura, botao_altura)
+
+
+# ---------------------- MAIN ----------------------
 def main():
     passaros = [Passaro(230, 350)]
     chao = Chao(730)
@@ -224,9 +253,34 @@ def main():
             if (passaro.y + passaro.imagem.get_height()) > chao.y or passaro.y < 0:
                 passaros.pop(i)
 
+        # ---------------------- GAME OVER ----------------------
+        if len(passaros) == 0:
+            botao = mostrar_game_over(tela, pontos)
+            esperando_reinicio = True
+            tempo_inicial = time.time()
+            tempo_espera = 2  # segundos antes de permitir reiniciar
+
+            while esperando_reinicio:
+                for evento in pygame.event.get():
+                    if evento.type == pygame.QUIT:
+                        pygame.quit()
+                        quit()
+
+                tempo_decorrido = time.time() - tempo_inicial
+                if tempo_decorrido >= tempo_espera:
+                    for evento in pygame.event.get():
+                        if evento.type == pygame.MOUSEBUTTONDOWN:
+                            if botao.collidepoint(evento.pos):
+                                esperando_reinicio = False
+                                main()
+                        if evento.type == pygame.KEYDOWN:
+                            if evento.key == pygame.K_SPACE:
+                                esperando_reinicio = False
+                                main()
+
         desenhar_tela(tela, passaros, canos, chao, pontos)
 
 
-
+# ---------------------- EXECUTAR ----------------------
 if __name__ == "__main__":
     main()
