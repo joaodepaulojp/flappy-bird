@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="97cb2519-b6a6-453b-90a4-c04469cc95b6" name="Changes" comment="feat: add initial commit FlappyBird game implementation in python">
+    <list default="true" id="97cb2519-b6a6-453b-90a4-c04469cc95b6" name="Changes" comment="feat: finalize Passaro class implementation">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FlappyBird.py" beforeDir="false" afterPath="$PROJECT_DIR$/FlappyBird.py" afterDir="false" />
     </list>
@@ -116,7 +116,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1757121332691</updated>
-      <workItem from="1757121343530" duration="2963000" />
+      <workItem from="1757121343530" duration="3742000" />
     </task>
     <task id="LOCAL-00001" summary="feat: add initial commit FlappyBird game implementation in python">
       <option name="closed" value="true" />
@@ -126,7 +126,15 @@
       <option name="project" value="LOCAL" />
       <updated>1757123999263</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="feat: finalize Passaro class implementation">
+      <option name="closed" value="true" />
+      <created>1757124637382</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1757124637382</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -145,6 +153,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="feat: add initial commit FlappyBird game implementation in python" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: add initial commit FlappyBird game implementation in python" />
+    <MESSAGE value="feat: finalize Passaro class implementation" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: finalize Passaro class implementation" />
   </component>
 </project>
